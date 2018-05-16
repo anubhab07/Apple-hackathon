@@ -3,7 +3,7 @@ import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/l
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'my-nav',
+  selector: 'app-my-nav',
   templateUrl: './my-nav.component.html',
   styleUrls: ['./my-nav.component.css']
 })
