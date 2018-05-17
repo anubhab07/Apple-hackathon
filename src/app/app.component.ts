@@ -10,5 +10,10 @@ import { Observable } from 'rxjs';
 export class AppComponent {
   title = 'app';
   isHandset: Observable<BreakpointState> = this.breakpointObserver.observe(Breakpoints.Handset);
+  orders = [
+    {value: 'ORD0001', viewValue: 'ORD0001'},
+    {value: 'ORD0002', viewValue: 'ORD0002'},
+    {value: 'ORD0003', viewValue: 'ORD0003'}
+  ];
   constructor(private breakpointObserver: BreakpointObserver) {}
 }

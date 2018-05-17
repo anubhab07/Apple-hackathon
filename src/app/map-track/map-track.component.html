@@ -1,3 +1,31 @@
-<agm-map [latitude]="lat" [longitude]="lng">
-  <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-</agm-map>
+<div *ngIf="isSourceFetched && isLocationFetched;else mapLoading">
+  <agm-map [latitude]="currentLocation.latitude" [longitude]="currentLocation.longitude" [zoom]="16">
+    <agm-marker [latitude]="currentLocation.latitude" [longitude]="currentLocation.longitude"></agm-marker>
+    <agm-marker [latitude]="source.latitude" [longitude]="source.longitude" label="source"></agm-marker>
+    <agm-marker [latitude]="destination.latitude" [longitude]="destination.longitude" label="destination"></agm-marker>
+
+    <div appMapDirections [origin]="source" [destination]="currentLocation"></div>
+  </agm-map>
+  
+</div>
+<ng-template #mapLoading>
+  <div id="divLoading">
+    <div style="position: absolute; color: White; top: 50%; left: 45%;">
+      <mat-spinner></mat-spinner>
+    </div>
+  </div>
+</ng-template>
+
+
+
+
+
+<!-- <agm-polyline *ngFor="let polyline of polylines;let i = index;"  [strokeColor]="polyline.color">
+    <agm-polyline-point *ngFor="let point of polyline.path" [latitude]="point.latitude" [longitude]="point.longitude">
+    </agm-polyline-point>
+</agm-polyline>   -->
+
+<!-- <agm-polyline [geodesic]="true" [strokeColor]="'#0eb7f6'" [polylineDraggable]="true">
+  <agm-polyline-point [latitude]="source.latitude" [longitude]="source.longitude"></agm-polyline-point>
+  <agm-polyline-point [latitude]="destination.latitude" [longitude]="destination.longitude"></agm-polyline-point>
+</agm-polyline> -->

@@ -14,16 +14,16 @@ export class FetchLocationService {
 
   constructor(private _http: HttpClient) { }
 
-  getCurrentLocation(orderId): Observable<Location> {
+  getCurrentLocation(orderId): Observable<any> {
     // returns current order location
-    const url = 'https://ordlocator.herokuapp.com/testService';
-    return this._http.get(url)
-    .map((res: Response) => res.json());
+    const url = 'https://ordlocator.herokuapp.com/getCurLoc?orderid=' + orderId;
+    return this._http.get(url);
   }
 
-  getOrderDetails(orderId): Observable<Location> {
+  getOrderDetails(orderId: string): Observable<any> {
     // returns order details
-    return this._http.get('url')
-    .map((res: Response) => res.json());
+    const url = 'https://ordlocator.herokuapp.com/getOrderData?orderid=' + orderId;
+    return this._http.get(url);
+    // .map((res: Response) => res.json());
   }
 }

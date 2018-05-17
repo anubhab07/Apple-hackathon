@@ -22,6 +22,19 @@
         </mat-sidenav-content>
     </mat-sidenav-container> -->
 <br />
-<div class="map-container container">
-    <app-map-track></app-map-track>
+<div class="map-container container-fluid">
+    <div class="row">
+    <div class="col-xs-2 col-sm-2 container-fluid">
+        <mat-form-field>
+            <mat-select placeholder="Select Order">
+            <mat-option *ngFor="let order of orders" [value]="order.value">
+                {{ order.viewValue }}
+            </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="col-xs-9 col-sm-9 container-fluid">
+     <app-map-track></app-map-track>
+    </div>
+</div>
 </div>
