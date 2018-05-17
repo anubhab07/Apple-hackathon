@@ -1,8 +1,8 @@
 <!-- <app-my-nav></app-my-nav> -->
-<!-- <mat-toolbar color="primary">
+<mat-toolbar color="primary">
     <span>Quick Tracker</span>
-</mat-toolbar> -->
-<mat-sidenav-container class="sidenav-container">
+</mat-toolbar>
+<!-- <mat-sidenav-container class="sidenav-container">
         <mat-sidenav #drawer class="sidenav" fixedInViewport="true" [attr.role]="isHandset ? 'dialog' : 'navigation'" [mode]="(isHandset | async)!.matches ? 'push' : 'side'" [opened]="!(isHandset | async)!.matches">
             <mat-toolbar color="primary">Menu</mat-toolbar>
             <mat-nav-list>
@@ -18,10 +18,10 @@
             </mat-toolbar>
         </mat-sidenav-content>
         <mat-sidenav-content>
-                <div class="map-container container">
-                        <app-map-track></app-map-track>
-                    </div>
+                
         </mat-sidenav-content>
-    </mat-sidenav-container>
-<!-- <br> -->
-
+    </mat-sidenav-container> -->
+<br />
+<div class="map-container container">
+    <app-map-track></app-map-track>
+</div>
