@@ -32,7 +32,7 @@
     "rxjs": "^6.1.0",
     "rxjs-compat": "^6.1.0",
     "zone.js": "^0.8.26",
-    "typescript": "~2.7.2",
+    "typescript": "~2.7.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.6.1",
@@ -53,7 +53,7 @@
     "tslint": "~5.9.1"
   },
   "engines": {
-    "node": "6.11.0",
-    "npm": "3.10.10"
+    "node": "10.1.0",
+    "npm": "6.0.1"
     }
 }
