@@ -18,7 +18,7 @@ export class MapTrackComponent implements OnInit {
 
   isSourceFetched = false;
   isLocationFetched = false;
-  orderId = 'ORD0001';
+  orderId = 'ORD0020';
 
 
   // source = {latitude: 20.342861, longitude: 85.804166};
@@ -27,6 +27,26 @@ export class MapTrackComponent implements OnInit {
   source = new Location();
   destination = new Location();
   currentLocation = new Location();
+  historyLocationArr = [];
+  sourceLabel = {
+    color: '#027c13',
+    fontSize: '14px',
+    fontWeight: 'bold',
+    text: 'Source',
+  };
+  destinationLabel = {
+    color: '#027c13',
+    fontSize: '14px',
+    fontWeight: 'bold',
+    text: 'Destination',
+  };
+  currentLocationLabel = {
+    color: '#0a4cb5',
+    fontSize: '14px',
+    fontWeight: 'bold',
+    text: 'Live'
+  };
+
   public latitude: number;
   public longitude: number;
   public maxSpeed: number;
@@ -39,6 +59,7 @@ export class MapTrackComponent implements OnInit {
   ngOnInit() {
     this.getOrderDetails(this.orderId);
     this.getcurrentLocation(this.orderId);
+    this.getLocationHistory(this.orderId);
   }
 
   getSource() {
@@ -63,20 +84,54 @@ export class MapTrackComponent implements OnInit {
     this._fetchLocation.getCurrentLocation(orderId).subscribe(res => {
       this.currentLocation.latitude = parseFloat(res.lattitude);
       this.currentLocation.longitude = parseFloat(res.longitude);
-      this.isLocationFetched = true;
+      // this.isLocationFetched = true;
       // console.log(this.currentLocation);
       // setTimeout(this.getcurrentLocation(orderId), 3000);
     });
 
 
+    // TimerObservable.create(0, 1000)
+    //   .takeWhile(() => this.alive) // only fires when component is alive
+    //   .subscribe(() => {
+    //     this._fetchLocation.getCurrentLocation(orderId)
+    //       .subscribe(res => {
+    //         this.currentLocation.latitude = parseFloat(res.lattitude);
+    //         this.currentLocation.longitude = parseFloat(res.longitude);
+    //         this.isSourceFetched = true;
+    //         // console.log(res);
+    //       });
+    //   });
+  }
+
+  getLocationHistory(orderId) {
+    this._fetchLocation.getLocationHistory(orderId).subscribe(res => {
+      for (let i = 0; i < res.length; i++) {
+        const loc = res[i];
+        const histElem = new Location();
+        histElem.latitude = parseFloat(loc.lattitude);
+        histElem.longitude = parseFloat(loc.longitude);
+        this.historyLocationArr.push(histElem);
+      }
+      // console.log(this.historyLocationArr[0]);
+      this.isLocationFetched = true;
+    });
+
     TimerObservable.create(0, 1000)
       .takeWhile(() => this.alive) // only fires when component is alive
       .subscribe(() => {
-        this._fetchLocation.getCurrentLocation(orderId)
+        this._fetchLocation.getLocationHistory(orderId)
           .subscribe(res => {
-            this.currentLocation.latitude = parseFloat(res.lattitude);
-            this.currentLocation.longitude = parseFloat(res.longitude);
-            // console.log(res);
+            const previousLength = this.historyLocationArr.length;
+            if (previousLength !== res.length) {
+              for (let i = previousLength; i < res.length; i++) {
+                const loc = res[i];
+                const histElem = new Location();
+                histElem.latitude = parseFloat(loc.lattitude);
+                histElem.longitude = parseFloat(loc.longitude);
+                this.historyLocationArr.push(histElem);
+              }
+              this.isLocationFetched = true;
+            }
           });
       });
   }

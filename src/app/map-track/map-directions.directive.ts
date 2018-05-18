@@ -20,7 +20,7 @@ export class MapDirectionsDirective implements OnInit {
   getDirection() {
     this.gmapsApi.getNativeMap().then(map => {
       const directionsService = new google.maps.DirectionsService;
-      const directionsDisplay = new google.maps.DirectionsRenderer({suppressMarkers:true});
+      const directionsDisplay = new google.maps.DirectionsRenderer({suppressMarkers: true});
       directionsDisplay.setMap(map);
       console.log(this.destination);
       directionsService.route({

@@ -1,16 +1,20 @@
 <div *ngIf="isSourceFetched && isLocationFetched;else mapLoading">
   <agm-map [latitude]="currentLocation.latitude" [longitude]="currentLocation.longitude" [zoom]="16">
-    <agm-marker [latitude]="currentLocation.latitude" [longitude]="currentLocation.longitude"></agm-marker>
-    <agm-marker [latitude]="source.latitude" [longitude]="source.longitude" label="source"></agm-marker>
-    <agm-marker [latitude]="destination.latitude" [longitude]="destination.longitude" label="destination"></agm-marker>
+    <agm-marker [latitude]="currentLocation.latitude" [longitude]="currentLocation.longitude" [iconUrl]="'./assets/images/delivery2.png'"></agm-marker>
+    <agm-marker [latitude]="source.latitude" [longitude]="source.longitude" [label]="sourceLabel"></agm-marker>
+    <agm-marker [latitude]="destination.latitude" [longitude]="destination.longitude" [label]="destinationLabel"></agm-marker>
 
-    <div appMapDirections [origin]="source" [destination]="currentLocation"></div>
+    <!-- <div appMapDirections [origin]="source" [destination]="currentLocation"></div> -->
+    <agm-polyline [strokeColor]="'blue'">
+      <agm-polyline-point  *ngFor="let point of historyLocationArr"  [latitude]="point.latitude" [longitude]="point.longitude">
+      </agm-polyline-point>
+    </agm-polyline>
   </agm-map>
   
 </div>
 <ng-template #mapLoading>
   <div id="divLoading">
-    <div style="position: absolute; color: White; top: 50%; left: 45%;">
+    <div id="divLoadingInner">
       <mat-spinner></mat-spinner>
     </div>
   </div>

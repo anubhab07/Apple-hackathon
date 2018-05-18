@@ -2,39 +2,26 @@
 <mat-toolbar color="primary">
     <span>Quick Tracker</span>
 </mat-toolbar>
-<!-- <mat-sidenav-container class="sidenav-container">
-        <mat-sidenav #drawer class="sidenav" fixedInViewport="true" [attr.role]="isHandset ? 'dialog' : 'navigation'" [mode]="(isHandset | async)!.matches ? 'push' : 'side'" [opened]="!(isHandset | async)!.matches">
-            <mat-toolbar color="primary">Menu</mat-toolbar>
-            <mat-nav-list>
-                <a mat-list-item href="#">Track Order</a>
-            </mat-nav-list>
-        </mat-sidenav>
-        <mat-sidenav-content>
-            <mat-toolbar color="primary">
-                <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" *ngIf="(isHandset | async)!.matches">
-                    <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-                </button>
-                <span>Quick Tracker</span>
-            </mat-toolbar>
-        </mat-sidenav-content>
-        <mat-sidenav-content>
-                
-        </mat-sidenav-content>
-    </mat-sidenav-container> -->
+
 <br />
 <div class="map-container container-fluid">
     <div class="row">
-    <div class="col-xs-2 col-sm-2 container-fluid">
-        <mat-form-field>
-            <mat-select placeholder="Select Order">
-            <mat-option *ngFor="let order of orders" [value]="order.value">
-                {{ order.viewValue }}
-            </mat-option>
-            </mat-select>
-        </mat-form-field>
+        <div class="col-xs-2 col-sm-2 container-fluid">
+            <div class="row">
+                <mat-form-field>
+                    <mat-select placeholder="Select Order">
+                        <mat-option *ngFor="let order of orders" [value]="order.value">
+                            {{ order.viewValue }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <button mat-raised-button (click)="openBottomSheet()">Order Details</button>
+            </div>
+        </div>
+        <div class="col-xs-9 col-sm-9 container-fluid">
+            <app-map-track></app-map-track>
+        </div>
     </div>
-    <div class="col-xs-9 col-sm-9 container-fluid">
-     <app-map-track></app-map-track>
-    </div>
-</div>
 </div>

@@ -26,4 +26,9 @@ export class FetchLocationService {
     return this._http.get(url);
     // .map((res: Response) => res.json());
   }
+
+  getLocationHistory(orderId: string): Observable<any> {
+    const url = 'https://ordlocator.herokuapp.com/getLocData?orderid=' + orderId;
+    return this._http.get(url);
+  }
 }
