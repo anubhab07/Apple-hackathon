@@ -6,22 +6,33 @@
 <br />
 <div class="map-container container-fluid">
     <div class="row">
-        <div class="col-xs-2 col-sm-2 container-fluid">
-            <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-2">
+            <div class="row container-fluid">
+            <!-- <mat-card>
                 <mat-form-field>
-                    <mat-select placeholder="Select Order">
+                    <mat-select [(value)]="orderId" placeholder="Select Order">
+                        <mat-option *ngFor="let order of orders" [value]="order.value">
+                            {{ order.viewValue }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </mat-card> -->
+            <div class="col-xs-4">
+                <mat-form-field>
+                    <mat-select [(value)]="orderId" placeholder="Select Order">
                         <mat-option *ngFor="let order of orders" [value]="order.value">
                             {{ order.viewValue }}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
-            <div class="row">
-                <button mat-raised-button (click)="openBottomSheet()">Order Details</button>
+            <div class="col-xs-6 order-details-btn">
+                <button mat-raised-button [color]="'primary'" (click)="openBottomSheet()">Order Details</button>
             </div>
         </div>
-        <div class="col-xs-9 col-sm-9 container-fluid">
-            <app-map-track></app-map-track>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-10 container-fluid">
+            <app-map-track [orderId]='orderId'></app-map-track>
         </div>
     </div>
 </div>

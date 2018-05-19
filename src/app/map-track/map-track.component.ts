@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FetchLocationService } from './fetch-location.service';
 import { Location } from './Location';
 import { Observable } from 'rxjs';
@@ -13,12 +13,14 @@ import 'rxjs/add/operator/takeWhile';
   styleUrls: ['./map-track.component.css']
 })
 export class MapTrackComponent implements OnInit {
+  @Input() orderId: string;
+
   lat = 51.678418;
   lng = 7.809007;
 
   isSourceFetched = false;
   isLocationFetched = false;
-  orderId = 'ORD0020';
+  // orderId = 'ORD0020';
 
 
   // source = {latitude: 20.342861, longitude: 85.804166};
@@ -82,25 +84,15 @@ export class MapTrackComponent implements OnInit {
   getcurrentLocation(orderId) {
     // fetch current location
     this._fetchLocation.getCurrentLocation(orderId).subscribe(res => {
-      this.currentLocation.latitude = parseFloat(res.lattitude);
-      this.currentLocation.longitude = parseFloat(res.longitude);
+      if (res) {
+        this.currentLocation.latitude = parseFloat(res.lattitude);
+        this.currentLocation.longitude = parseFloat(res.longitude);
+      } else {
+        this.currentLocation = this.currentLocation2;
+        this.source = this.currentLocation2;
+      }
       // this.isLocationFetched = true;
-      // console.log(this.currentLocation);
-      // setTimeout(this.getcurrentLocation(orderId), 3000);
     });
-
-
-    // TimerObservable.create(0, 1000)
-    //   .takeWhile(() => this.alive) // only fires when component is alive
-    //   .subscribe(() => {
-    //     this._fetchLocation.getCurrentLocation(orderId)
-    //       .subscribe(res => {
-    //         this.currentLocation.latitude = parseFloat(res.lattitude);
-    //         this.currentLocation.longitude = parseFloat(res.longitude);
-    //         this.isSourceFetched = true;
-    //         // console.log(res);
-    //       });
-    //   });
   }
 
   getLocationHistory(orderId) {
@@ -114,8 +106,11 @@ export class MapTrackComponent implements OnInit {
       }
       // console.log(this.historyLocationArr[0]);
       this.isLocationFetched = true;
+      this.startLocationScheduler(orderId);
     });
+  }
 
+  startLocationScheduler(orderId) {
     TimerObservable.create(0, 1000)
       .takeWhile(() => this.alive) // only fires when component is alive
       .subscribe(() => {
@@ -129,8 +124,10 @@ export class MapTrackComponent implements OnInit {
                 histElem.latitude = parseFloat(loc.lattitude);
                 histElem.longitude = parseFloat(loc.longitude);
                 this.historyLocationArr.push(histElem);
+                this.currentLocation = this.historyLocationArr[res.length - 1];
               }
               this.isLocationFetched = true;
+              console.log(this.orderId);
             }
           });
       });

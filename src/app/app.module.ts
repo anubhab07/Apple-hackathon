@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent, BottomSheetComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -13,6 +14,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import {MatChipsModule} from '@angular/material/chips';
+import {MatCardModule} from '@angular/material/card';
 
 import { AgmCoreModule } from '@agm/core';
 import { MapDirectionsDirective } from './map-track/map-directions.directive';
@@ -27,6 +29,7 @@ import { MapDirectionsDirective } from './map-track/map-directions.directive';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
     LayoutModule,
@@ -40,6 +43,7 @@ import { MapDirectionsDirective } from './map-track/map-directions.directive';
     MatExpansionModule,
     MatBottomSheetModule,
     MatChipsModule,
+    MatCardModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCsRrsHCNv1yTfK1slvO9UGKTQUv-YY-6M'
     })

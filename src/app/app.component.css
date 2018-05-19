@@ -1,0 +1,21 @@
+.order-details-btn{
+    float: right;
+    
+}
+
+@media screen and (max-width: 575px) {
+    .order-details-btn{
+        padding-top: 10px;
+        padding-left: 15px;
+    }
+  }
+
+/* .mat-select{
+    width:100px;
+    background-color: red !important;
+    font-size: 14px;
+}
+
+mat-form-field-infix{
+    width: 50px;
+} */
